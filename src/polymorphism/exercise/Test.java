@@ -15,6 +15,7 @@ public class Test {
 		aa.implementedMethod();
 		aa.unimplementedMethod();
 		//aa.aaiMethod(); nie znaleziona poniewaz rzutujemy w gore na typ AA podczas deklaracji
+		((AAI)aa).aaiMethod(); // rzutowanie w dol do typu AAI
 		AAI aai = new AAI(); 
 		aai.aaiMethod(); // dziala, poniewaz bazowy typ jest taki sam jak koncowy
 		aai.methodForAbstractClassToImplementIntoOtherClass();
