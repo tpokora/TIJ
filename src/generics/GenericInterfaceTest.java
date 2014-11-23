@@ -84,14 +84,16 @@ class Garage<T> {
 		return size;
 	}
 	
-	public void showGarageContent() {
+	public String showGarageContent() {
+		String output = "Garage status:\n";
 		for(int i = 0; i < cars.length; i++) {
 			if(isSpotFree(i)) {
-				System.out.println("Spot " + i + " is empty");
+				output += "Spot " + i + " is empty\n";
 			} else {
-				System.out.println("Spot " + i + ": " + cars[i].toString());
+				output += "Spot " + i + ": " + cars[i].toString() + "\n";
 			}
 		}
+		return output;
 	}
 	
 	public void parkCar(T car) {
@@ -112,12 +114,13 @@ class Garage<T> {
 		}
 	}
 	
-	public void unparkCar(int index) {
+	public String unparkCar(int index) {
 		if(cars[index].getClass().getSimpleName().equals("Car")) {
-			System.out.println("Spot " + index + " is free, no need to unpark");
+			return "Spot " + index + " is free, no need to unpark";
 		} else {
-			System.out.println(cars[index].toString() + " unparked from spot " + index);
+			String output = cars[index].toString() + " unparked from spot " + index;
 			cars[index] = (T) new Car();
+			return output;
 		}
 	}
 	
@@ -136,17 +139,17 @@ public class GenericInterfaceTest {
 	public static void main(String[] args) {
 		CarMakerImpl<Car> carMaker = new CarMakerImpl<Car>();
 		Garage<Car> garage = new Garage<Car>(4);
-		garage.showGarageContent();
+		System.out.println(garage.showGarageContent());
 		garage.parkCar(carMaker.create(0));
 		garage.parkCar(carMaker.create(2));
 		garage.parkCar(carMaker.create(2));
-		garage.showGarageContent();
-		garage.unparkCar(1);
-		garage.showGarageContent();
+		System.out.println(garage.showGarageContent());
+		System.out.println(garage.unparkCar(1));
+		System.out.println(garage.showGarageContent());
 		garage.parkCar(carMaker.create(1));
 		garage.parkCar(carMaker.create(2));
-		garage.showGarageContent();
+		System.out.println(garage.showGarageContent());
 		garage.parkCar(carMaker.create(2));
-		garage.showGarageContent();
+		System.out.println(garage.showGarageContent());
 	}
 }
