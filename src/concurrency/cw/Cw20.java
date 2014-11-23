@@ -12,11 +12,14 @@ class Interupt {
 	public static void przeszkadzanie(Runnable r, int seconds) 
 			throws InterruptedException {
 		Future<?> f = exec.submit(r);
+		//Thread t = new Thread(r);		// drugia mozliwosc uruchamiania watkow
+		//t.start();
 		System.out.println("Przerwanie " + r.getClass().getName() + 
 				" z poziomu klasy Interupt nast¹pi za " + seconds + 
 				" sekundy");
 		TimeUnit.SECONDS.sleep(seconds);
 		f.cancel(true);
+		//t.interrupt();
 		System.out.println("Przerwanie " + r.getClass().getName() + 
 				" z poziomu klasy Interupt");
 	}
